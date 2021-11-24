@@ -1,0 +1,101 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int suma (int a, int b)
+{
+    return a+b;
+}
+void wypisz (int q)
+{
+    cout<<q<<endl;
+}
+void wypisz (vector<int>tab)
+{
+    for(int i=0;i<tab.size();i++)
+    {
+        cout<<tab[i]<<" ";
+    }
+    cout<<endl;
+}
+bool CzyNalezy(vector<int>tab, int e)
+{
+    for(int i =0; i<tab.size();i++)
+    {
+        if(e==tab[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+bool CzyZawiera(vector<int>tab, vector<int>pod)
+{
+    for(int i=0;i<pod.size();i++)
+    {
+        if(!CzyNalezy(tab, pod[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+int minimalna (vector<int>tab)
+{
+    int m=tab[0];
+    for(int i = 0; i<tab.size();i++)
+    {
+        if(m>tab[i])
+        {
+            m=tab[i];
+        }
+    }
+    return m;
+}
+vector<int> unikalnosc(vector<int>tab)
+{
+    vector<int>unikalny;
+    for(int i=0;i<tab.size();i++)
+    {
+        if(!CzyNalezy(unikalny,tab[i]))
+        {
+            unikalny.push_back(tab[i]);
+        }
+    }
+    return unikalny;
+}
+int main()
+{
+    int a=98;
+    int b= -567;
+    int e=121;
+    vector<int>tab ={1,1,11,1,12,44,12,44,1,65,3,87,1,87,0,2};
+    vector<int>pod ={1,2,0};
+    wypisz(suma(a,b));
+    wypisz(tab);
+    bool z=CzyNalezy(tab, e);
+    {
+        if(z)
+        {
+            cout<<"Nalezy"<<endl;
+        }
+        else
+        {
+            cout<<"Nie nalezy"<<endl;
+        }
+    }
+     bool x=CzyZawiera(tab,pod);
+    {
+        if(x)
+        {
+            cout<<"Nalezy"<<endl;
+        }
+        else
+        {
+            cout<<"Nie nalezy"<<endl;
+        }
+    }
+    wypisz(minimalna(tab));
+    wypisz(unikalnosc(tab));
+}
